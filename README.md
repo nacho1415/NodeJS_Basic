@@ -36,3 +36,37 @@
 * 모바일 웹 framework - React Native 등
 * 데스크탑 개발 도구: Electron(Atom, Slack, VScode, Discord 등 제작)
 
+# Node.js 기능
+# 2.1 모듈 만들기
+#### 외부 파일의 변수 사용
+
+assi.js 파일을 만들어 다음 코드를 작성해보자
+```
+const add = 'Hi';
+const min = 'By';
+
+module.exports = {
+    add,
+    min,
+};
+```
+선언된 add와 min 변수를 **module.exports에 할당**하여 객체를 사용할 수 있다. 파일을 모듈화할 수 있다.
+
+main.js 파일을 통해 변수를 사용해보자
+```
+const value = require('./assi');
+console.log(value);
+```
+module.export에 할당한 객체는 `변수 = require('경로')`를 통해 외부파일에서 사용할 수 있다.
+require은 node에서 제공하는 함수이다.
+```
+{ add: 'Hi', min: 'By' }
+```
+* require('./assi') 구조에서 온점(.)은 현재 위치를 뜻한다.
+* 구조 분해를 통해서 객체를 받을 수 있다.  **단, 구조 분해 할당을 할 때는 속성명과 변수명이 같아야한다.**
+ex)
+```
+const { min, add } = require('./assi');
+console.log(min, add);
+```
+* 이미 객체 변수를 할당한 다음 또다시 변수를 할당하면 기존의 참조관계가 사라진다.
