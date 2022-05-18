@@ -70,3 +70,23 @@ const { min, add } = require('./assi');
 console.log(min, add);
 ```
 * 이미 객체 변수를 할당한 다음 또다시 변수를 할당하면 기존의 참조관계가 사라진다.
+
+# Node.js 서버
+
+# 3.1 노드 서버 만들기
+
+#### 서버와 클라이언트의 관계
+*  1) 서버는 클라이언트에게 **요청(request)**을 받음
+*  2) 서버가 요청을 처리함
+* 3) 서버가 **답변(reponse)**을 보냄
+
+#### 간단한 서버 만들기
+```
+const http = require('http');
+
+const Server = http.createServer((req, res) => {
+    res.write('<h1>Hello Node!</h1>');
+    res.write('<p>Hello server</p>');
+    res.end('<p>Hello Client!</p>');
+})
+```
