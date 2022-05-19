@@ -89,13 +89,38 @@ inject.js 또한 마찬가지로 확장 프로그램에서 보내는 요청으�
 		cookie에 한글을 넣을 시 오류가 발생한다. 어떻게 해결해야하나
 쿠키에 집어넣을 값을 encodeURIComponent(값) 통해 한글로 된 정보의 형태를 변환하여 해결한다.
 
-### 혼란을 주거나 이해가 힘들었던 명령어
+### 혼란을 주거나 이해가 힘들었던 명령어 또는 알아둬야하는 명령어
 
-* **http 모듈**
+* **require('http')**
 		NodeJS 입문 과정에서 겪은 문제로, require('http') 에서 require이 모듈을 불러오는 것까지는 알지만 http 모듈이 정확히 뭘하는 모듈인가
 http 모듈은 Node.js의 기본 모듈로 http 웹 서버와 클라이언트를 생성하는 것과 관련된 모든 기능를 당담한다.
 
-### 알면 좋고 모르면 안좋은 기능들(무조건 기록해야돼)
+* **Date.toGMTString** [INF]
+GMT 기준 현재 날짜, 시간을 알려주는 명령어
+
+* **Httponly**
+
+```javascript
+http = require("http")
+http.createServer((res.req) => {
+	const { query } = url.parse(req.url);
+	const { name } = qs.parse(query);
+	const expires = new Date();
+	// 쿠키 유효 시간을 현재시간 + 5분으로 설정
+	expires.setMinutes(expires.getMinutes() + 5);
+	res.writeHead(302, {
+		 Location: '/',
+		 'Set-Cookie': `name=${encodeURIComponent(name)}; Expires=${expires.toGMTString()}; HttpOnly; Path=/`,
+	});
+	res.end();
+})
+```
+자바스크립트를 통해 쿠키에 접근하지 못하게 하는 코드로 Http 통해서만 쿠키에 접근할 수 있다. 보안 용도
+etc)
+1. Path=/ 를 적는 이유는 /아래 있는 주소는 모두 유효하다는 뜻 
+2. Cookie 이용하여 보안을 강화하는 이유는 Cookie에 있는 안전장치들을 사용하기 위함이다.
+Cookie를 사용하지 않고 데이터를 주고받는다면 안전장치 코드를 직접 적어야하는데 그럴 바엔 cookie 사용해서 브라우저가 마련해둔 안전장치를 사용하는게 낫다.
+### 알면 좋고 모르면 안좋은 기능들(무조건 기록)
 
 * **Cookie 삭제**
 		쿠키를 삭제 할 때는 application > storage > cookies 에서 페이지마다 x를 눌러서 캐시를 삭제할 수 있다. 클릭 한 번이면 충분하지만 귀찮은 작업이니 되도록 실수하지 않도록하자
