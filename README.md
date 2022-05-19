@@ -79,6 +79,18 @@ const fs = require('fs');
 ```
 * fs. readfile('경로') - 파일을 불러올 수 있다.
 
+### 혼란을 주거나 이해하기 힘들었던 개념
+* **favicon.ico**
+		어떤 페이지를 새로고침해도 뜨는 favicon.ico는 무엇인가
+favicon.ico는 크롬에서 보내는 요청으로 favicon이 있는지 확인하는 요청이다. 신경쓸 필요는 없다. **favicon**은 페이지의 이름 옆에 있는 아이콘이다. 
+inject.js 또한 마찬가지로 확장 프로그램에서 보내는 요청으로 신경쓸 필요는 없다.
+
+### 혼란을 주거나 이해가 힘들었던 명령어
+
+* **http 모듈**
+		NodeJS 입문 과정에서 겪은 문제로, require('http') 에서 require이 모듈을 불러오는 것까지는 알지만 http 모듈이 정확히 뭘하는 모듈인가
+http 모듈은 Node.js의 기본 모듈로 http 웹 서버와 클라이언트를 생성하는 것과 관련된 모든 기능를 당담한다.
+
 # Node.js 서버
 
 # 3.1 노드 서버 만들기
@@ -117,3 +129,11 @@ const Server = http.createServer((req, res) => {
 #### HTTP 프로토콜
 데이터 통신을 원활하게 하기 위한 통신 규약
 * 클라이언트가 누구든 HTTP 프로토콜로 소통 가능
+
+### Cookie 서버 만들기
+
+Cookie란 키=값의 쌍으로 매요청(request)마다 서버는 Cookie를 동봉해서 답변(response)을 보낸다
+
+##### Cookie를 넣는것을 직접 구현
+**writeHead():** 요청 헤더에 입력하는 매서드
+**Set-Cookie:** 브라우저에게 쿠키를 설정하라고 명령

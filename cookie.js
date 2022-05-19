@@ -1,0 +1,9 @@
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Set-Cookie': 'mycookie=test'});
+    res.end('Hello Cookie');
+})
+    .listen(8083, () => {
+        console.log('8083번 포트에서 서버 대기중입니다!');
+    });
